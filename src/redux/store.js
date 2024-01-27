@@ -24,13 +24,14 @@ function* fetchAllMovies() {
   }
 }
 // TODO uncomment when route is done
-// function * getDetails(action){
-//   try {
-//     const details = yield axios.get('/api')
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+function * getDetails(action){
+  try {
+    const details = yield axios.get(`/api/movies/${action.payload}`)
+    yield put({type: "SET_DETAILS", payload: details})
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

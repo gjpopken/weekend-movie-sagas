@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Container, Typography, Button, Box } from "@mui/material";
 
 const DetailsPage = () => {
     const details = useSelector(store => store.details)
@@ -8,19 +9,19 @@ const DetailsPage = () => {
 
     if (details.genres) {
         return (
-            <div data-testid="movieDetails">
-                <div><img src={details.poster} alt="" data-testid="toDetails"/></div>
+            <Container data-testid="movieDetails">
+                <div><img src={details.poster} alt="" data-testid="toDetails" style={{ borderRadius: '25px' }} /></div>
+
+                <Typography variant="h5">{details.title}</Typography>
+            
+                    <Typography variant="h6">{details.genres.map(element => { return element.name }).join(', ')}</Typography>
+                    <Box component='div' >
+                        <Typography variant="body1">{details.description}</Typography>
+                    </Box>
                 <div>
-                    <h2>{details.title}</h2>
-                    <div>
-                        <h3>{details.genres.map(element => {return element.name}).join(', ')}</h3>   
-                        <p>{details.description}</p>
-                    </div>
-                    <div>
-                        <button onClick={() => history.push('/')} data-testid="toList">Back to movies</button>
-                    </div>
+                    <button onClick={() => history.push('/')} data-testid="toList">Back to movies</button>
                 </div>
-            </div>
+            </Container>
         )
     }
     return <p>Nothing to see here!</p>

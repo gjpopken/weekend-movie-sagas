@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Typography } from '@mui/material';
 import MovieItem from '../MovieItem/MovieItem';
 import './MovieList.css';
@@ -8,7 +7,6 @@ import './MovieList.css';
 function MovieList() {
 
   const dispatch = useDispatch();
-  const history = useHistory()
   const movies = useSelector(store => store.movies);
 
   useEffect(() => {

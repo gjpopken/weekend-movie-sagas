@@ -20,8 +20,8 @@ function MovieList() {
         <Grid container spacing={2} justifyContent={'center'}>
           {movies.map(movie => {
             return (
-              <Grid item>
-                <MovieItem movie={movie} key={movie.id} />
+              <Grid item key={movie.id}>
+                <MovieItem movie={movie} />
               </Grid>
             );
           })}

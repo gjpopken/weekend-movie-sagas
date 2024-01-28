@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import { Typography, Container, Grid } from '@mui/material';
 import MovieItem from '../MovieItem/MovieItem';
 import './MovieList.css';
 
@@ -15,14 +15,19 @@ function MovieList() {
 
   return (
     <main>
-      <Typography variant='h2'>Movie List</Typography>
-      <section className="movies">
-        {movies.map(movie => {
-          return (
-            <MovieItem movie={movie} key={movie.id}/>
-          );
-        })}
-      </section>
+      <Typography variant='h2' gutterBottom>Movie List</Typography>
+      <Container component='section' className="movies">
+        <Grid container spacing={2} justifyContent={'center'}>
+          {movies.map(movie => {
+            return (
+              <Grid item>
+                <MovieItem movie={movie} key={movie.id} />
+              </Grid>
+            );
+          })}
+        </Grid>
+
+      </Container>
     </main>
   );
 }

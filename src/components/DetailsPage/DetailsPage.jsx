@@ -21,7 +21,7 @@ const DetailsPage = () => {
 
     if (details.genres) {
         return (
-            <Container data-testid="movieDetails" sx={{mb: 10}}>
+            <Container data-testid="movieDetails" sx={{ mb: 10 }}>
                 <div style={{
                     margin: '10px',
                     position: 'relative',
@@ -29,16 +29,6 @@ const DetailsPage = () => {
                 }}>
                     <Button onClick={() => history.push('/')} data-testid="toList" sx={{ position: 'absolute', left: 0 }} startIcon={<Icon>arrow_back_ios</Icon>}>Back to movies</Button>
                 </div>
-                {/* <Paper sx={{ p: 5 }} elevation={5}>
-                    <div><img src={details.poster} alt="" data-testid="toDetails" style={{ borderRadius: '25px' }} /></div>
-
-                    <Typography variant="h5">{details.title}</Typography>
-
-                    <Typography variant="h6">{details.genres.map(element => { return element.name }).join(', ')}</Typography>
-                    <Box component='div' >
-                        <Typography variant="body1">{details.description}</Typography>
-                    </Box>
-                </Paper> */}
                 <TableContainer component={Paper} elevation={5}>
                     <Table>
                         <TableBody>

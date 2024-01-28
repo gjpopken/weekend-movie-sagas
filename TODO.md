@@ -7,7 +7,7 @@
     - [x] Store in a reducer
 - [x] Render all information to DOM from reducer.
 - [x] Button that takes back to the List.
-- [ ] Style Page
+- [x] Style Page
 
 
 

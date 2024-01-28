@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
 
 export default function AddMovie() {
     const [input, setInput] = useState({})
 
+    const dispatch = useDispatch()
     const history = useHistory()
 
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log('in handle submit');
+        dispatch({type: "POST_MOVIE", payload: input})
+        history.push('/')
     }
 
     const updateInput = (value, key) => {

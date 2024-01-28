@@ -8,6 +8,12 @@ import axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
   yield takeEvery('GET_DETAILS', getDetails)
+  yield takeEvery('POST_MOVIE', postMovie)
+}
+
+function * postMovie(action) {
+  console.log('in post movie', action.payload);
+  yield axios.post('/api/movies', action.payload)
 }
 
 function* fetchAllMovies() {

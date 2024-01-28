@@ -1,12 +1,13 @@
 import { Route, HashRouter as Router } from 'react-router-dom';
 import MovieList from '../MovieList/MovieList';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import { Typography } from '@mui/material';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <Typography variant='h1'>The Movies Saga</Typography>
       <Router>
         <Route path="/" exact>
           <MovieList />

@@ -7,11 +7,11 @@
     - [x] Store in a reducer
 - [x] Render all information to DOM from reducer.
 - [x] Button that takes back to the List.
-- [ ] Style Page
+- [x] Style Page
 
 
 
 --TESTING--
 - [x] `data-testid="toDetails"` on movie post img tags. 
 - [x] `data-testid="movieDetails"` on Details page
-- [ ] `data-testid="toList"` on to List Button
+- [x] `data-testid="toList"` on to List Button

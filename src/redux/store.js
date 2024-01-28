@@ -23,11 +23,11 @@ function* fetchAllMovies() {
     console.log('fetchAllMovies error:', error);
   }
 }
-// TODO uncomment when route is done
+
 function * getDetails(action){
   try {
     const details = yield axios.get(`/api/movies/${action.payload}`)
-    yield put({type: "SET_DETAILS", payload: details})
+    yield put({type: "SET_DETAILS", payload: details.data})
   } catch (error) {
     console.log(error);
   }
@@ -70,6 +70,7 @@ const storeInstance = createStore(
   combineReducers({
     movies,
     genres,
+    details
   }),
   // Add sagaMiddleware to our store
   applyMiddleware(sagaMiddleware, logger),

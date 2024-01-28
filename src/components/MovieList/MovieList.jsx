@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Typography } from '@mui/material';
+import MovieItem from '../MovieItem/MovieItem';
 import './MovieList.css';
 
 function MovieList() {
@@ -15,18 +17,11 @@ function MovieList() {
 
   return (
     <main>
-      <h1>MovieList</h1>
+      <Typography variant='h2'>Movie List</Typography>
       <section className="movies">
         {movies.map(movie => {
           return (
-            <div data-testid='movieItem' key={movie.id}>
-              <h3>{movie.title}</h3>
-              <img
-                src={movie.poster}
-                alt={movie.title}
-                onClick={() => { history.push('/details'); dispatch({ type: "GET_DETAILS", payload: movie.id }) }}
-                data-testid="toDetails" />
-            </div>
+            <MovieItem movie={movie} key={movie.id}/>
           );
         })}
       </section>

@@ -18,7 +18,7 @@
 
 
 -- Stretch --
-- [ ] GET route for genres in the dropdown
+- [x] GET route for genres in the dropdown
 - [ ] style add page/link
 - [ ] useParams goal
 - [ ] README

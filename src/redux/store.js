@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, take } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
@@ -9,6 +9,16 @@ function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
   yield takeEvery('GET_DETAILS', getDetails)
   yield takeEvery('POST_MOVIE', postMovie)
+  yield takeEvery('GET_GENRES', getGenres)
+}
+
+function * getGenres(action) {
+  try {
+    const genres = yield axios.get('/api/genres')
+    yield put({type: "SET_GENRES", payload: genres.data})
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function * postMovie(action) {

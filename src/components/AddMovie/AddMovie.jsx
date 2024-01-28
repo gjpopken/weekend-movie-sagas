@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AddMovie() {
     const [input, setInput] = useState({})
 
+    const genres = useSelector(store => store.genres)
+
     const dispatch = useDispatch()
     const history = useHistory()
+
+    useEffect(() => {
+        dispatch({ type: "GET_GENRES" })
+    }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log('in handle submit');
-        dispatch({type: "POST_MOVIE", payload: input})
+        dispatch({ type: "POST_MOVIE", payload: input })
+        dispatch({type: "FETCH_MOVIES"})
         history.push('/')
     }
 
@@ -22,6 +29,19 @@ export default function AddMovie() {
             setInput({ ...input, [key]: value })
         }
 
+    }
+
+    const options = () => {
+        if (genres) {
+            return (
+                <>
+                    {genres.map(genre => {
+                        return <option value={genre.id}>{genre.name}</option>
+                    })}
+                </>
+            )
+        }
+        return <option value="">Nothing</option>
     }
 
     return (
@@ -36,20 +56,9 @@ export default function AddMovie() {
                 <label htmlFor="genreInput">Select a genre</label>
                 <select required name="" id="genreInput" onChange={(event) => updateInput(event.target.value, 'genre_id')}>
                     <option value={""}>--Genre--</option>
-                    <option value={1}>Adventure</option>
-                    <option value={2}>Animated</option>
-                    <option value={3}>Biographical</option>
-                    <option value={4}>Comedy</option>
-                    <option value={5}>Disaster</option>
-                    <option value={6}>Drama</option>
-                    <option value={7}>Epic</option>
-                    <option value={8}>Fantasy</option>
-                    <option value={9}>Musical</option>
-                    <option value={10}>Romantic</option>
-                    <option value={11}>Science Fiction</option>
-                    <option value={12}>Space-Opera</option>
-                    <option value={13}>Superhero</option>
+                    {options()}
                 </select>
+                {/* <p>{JSON.stringify(genres)}</p> */}
                 <div>
                     <label htmlFor="descInput">Enter Description</label>
                     <textarea required id="descInput" cols="30" rows="10" onChange={(event) => updateInput(event.target.value, 'description')}></textarea>

@@ -21,7 +21,11 @@ function MovieList() {
           return (
             <div data-testid='movieItem' key={movie.id}>
               <h3>{movie.title}</h3>
-              <img src={movie.poster} alt={movie.title} onClick={() => {history.push('/details');dispatch({type: "GET_DETAILS", payload: movie.id})}}/>
+              <img
+                src={movie.poster}
+                alt={movie.title}
+                onClick={() => { history.push('/details'); dispatch({ type: "GET_DETAILS", payload: movie.id }) }}
+                data-testid="toDetails" />
             </div>
           );
         })}

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './MovieList.css';
 
 function MovieList() {
 
   const dispatch = useDispatch();
+  const history = useHistory()
   const movies = useSelector(store => store.movies);
 
   useEffect(() => {
@@ -19,7 +21,11 @@ function MovieList() {
           return (
             <div data-testid='movieItem' key={movie.id}>
               <h3>{movie.title}</h3>
-              <img src={movie.poster} alt={movie.title}/>
+              <img
+                src={movie.poster}
+                alt={movie.title}
+                onClick={() => { history.push('/details'); dispatch({ type: "GET_DETAILS", payload: movie.id }) }}
+                data-testid="toDetails" />
             </div>
           );
         })}

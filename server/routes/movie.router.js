@@ -18,6 +18,44 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/:id', (req, res) => {
+  // console.log(req.params.id);
+  let allDetails = {};
+  // First, querying for the individual movie details, minus genres.
+  let queryText = `
+  SELECT movies.id, title, poster, description
+  FROM "movies"
+  WHERE id=$1;
+  `
+  const queryParams = [req.params.id]
+  // This a query inside of a query
+  pool.query(queryText, queryParams)
+    .then(result => {
+      // console.log(result.rows);
+      // res.send(result.rows)
+      allDetails = { ...allDetails, ...result.rows[0] }
+      console.log(allDetails);
+      queryText = `
+    SELECT genres.name
+    FROM "movies"
+    JOIN "movies_genres" ON movies_genres.movie_id = movies.id
+    JOIN "genres" ON movies_genres.genre_id = genres.id
+    WHERE movies.id = $1;
+    `
+    pool.query(queryText, queryParams)
+    .then(result => {
+      allDetails =  {...allDetails, genres: result.rows}
+      console.log(allDetails);
+      res.send(allDetails)
+    }).catch(error => {
+      console.log(error);
+    })
+    }).catch(error => {
+      console.log(error);
+    })
+  // res.sendStatus(200)
+})
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
@@ -60,7 +98,7 @@ router.post('/', (req, res) => {
           // catch for second query
           console.log(err);
           res.sendStatus(500)
-      })
+        })
     }).catch(err => { // 👈 Catch for first query
       console.log(err);
       res.sendStatus(500)

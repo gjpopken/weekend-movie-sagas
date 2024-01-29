@@ -3,10 +3,12 @@ import MovieList from '../MovieList/MovieList';
 import DetailsPage from '../DetailsPage/DetailsPage';
 import AddMovie from '../AddMovie/AddMovie';
 import { Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 
 function App() {
+
+
   return (
     <div className="App">
       <Typography variant='h1'>The Movies Saga</Typography>
@@ -17,7 +19,7 @@ function App() {
         </Route>
 
         {/* Details page */}
-        <Route path="/details">
+        <Route path="/details/:id">
           <DetailsPage />
         </Route>
         {/* Add Movie page */}

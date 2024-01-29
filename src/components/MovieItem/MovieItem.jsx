@@ -14,7 +14,10 @@ const MovieItem = ({ movie }) => {
             </CardContent>
             <CardActions>
                 <Button
-                    onClick={() => { history.push('/details'); dispatch({ type: "GET_DETAILS", payload: movie.id }) }}
+                    onClick={() => {
+                        history.push(`/details/${movie.id}`);
+                        // dispatch({ type: "GET_DETAILS", payload: movie.id })
+                    }}
                     data-testid="toDetails"
                 >More Info</Button>
             </CardActions>

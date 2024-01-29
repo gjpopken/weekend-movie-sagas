@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
     Container,
@@ -13,11 +14,18 @@ import {
     TableBody,
     TableCell
 } from "@mui/material";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const DetailsPage = () => {
     const details = useSelector(store => store.details)
     const history = useHistory()
-    console.log(details);
+    const dispatch = useDispatch()
+    const { id } = useParams()
+    console.log('param,', id);
+
+    useEffect(() => {
+        dispatch({ type: "GET_DETAILS", payload: id })
+    }, [])
 
     if (details.genres) {
         return (
